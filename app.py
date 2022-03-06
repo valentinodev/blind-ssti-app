@@ -34,7 +34,7 @@ def admin():
 
 @app.route('/admin/delete/<int:id>', methods=['GET'])
 def delete(id):
-    feedback = Todo.query.get_or_404(id)
+    feedback = Feedback.query.get_or_404(id)
     db.session.delete(feedback)
     db.session.commit()
     return 'The feedback has been deleted'
