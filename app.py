@@ -5,7 +5,7 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
-class Todo(db.Model):
+class Feedback(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     content = db.Column(db.String(200), nullable=False)
 
@@ -16,7 +16,7 @@ class Todo(db.Model):
 def index():
     feedback = request.args.get("feedback")
     if feedback:
-        feedback = Todo(content=feedback)
+        feedback = Feedback(content=feedback)
         db.session.add(feedback)
         db.session.commit()
         return 'Thanks for sending your feedback'
@@ -26,8 +26,8 @@ def index():
 @app.route('/admin/', methods=['GET'])
 def admin():
     password = request.args.get("password")
-    if password == 'admin':
-        feedbacks = Todo.query.all()
+    if password == 'Pa$$word@200':
+        feedbacks = Feedback.query.all()
         return render_template_string("<div>%s</div>" % feedbacks)
     else:
         return 'Wrong Password'
