@@ -26,12 +26,14 @@ def index():
 @app.route('/admin/', methods=['GET'])
 def admin():
     password = request.args.get("password")
+    # Hardcoded credentials
     if password == 'secret':
         feedbacks = Feedback.query.all()
+        # XSS and SSTI
         return render_template_string("<div>%s</div>" % feedbacks)
     else:
         return 'Wrong Password'
-
+# IDOR
 @app.route('/admin/delete/<int:id>', methods=['GET'])
 def delete(id):
     feedback = Feedback.query.get_or_404(id)
