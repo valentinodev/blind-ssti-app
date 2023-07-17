@@ -26,7 +26,7 @@ def index():
 @app.route('/admin/', methods=['GET'])
 def admin():
     password = request.args.get("password")
-    if password == 'Pa$$word@200':
+    if password == 'secret':
         feedbacks = Feedback.query.all()
         return render_template_string("<div>%s</div>" % feedbacks)
     else:
