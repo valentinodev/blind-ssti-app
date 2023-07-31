@@ -1,1 +1,1 @@
-# blind_xss_app
+# blind_ssti_app
